@@ -22,10 +22,10 @@ const HeroSection = () => {
       {/* Content */}
       <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
         <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 animate-fade-in">
-          Discover the River's Beauty 🚤
+          Discover the AK47 Beauty 
         </h1>
         <p className="text-xl md:text-2xl text-white/90 mb-8 animate-fade-in" style={{ animationDelay: "0.2s" }}>
-          Book your peaceful river cruise for up to 8 passengers
+          Book your peaceful AK47 for up to 8 passengers
         </p>
         <Button
           onClick={scrollToBooking}

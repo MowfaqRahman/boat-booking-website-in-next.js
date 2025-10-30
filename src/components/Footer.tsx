@@ -1,4 +1,5 @@
-import { Anchor, Facebook, Instagram, Youtube } from "lucide-react";
+import { Facebook, Instagram, Youtube } from "lucide-react";
+import logonav from "../assets/logonav.png";
 
 const Footer = () => {
   const scrollToSection = (id: string) => {
@@ -13,8 +14,8 @@ const Footer = () => {
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <Anchor className="h-8 w-8 text-secondary" />
-              <span className="text-2xl font-bold">RiverCruise</span>
+              <img src={logonav} alt="AK47 Logo" className="h-8 w-auto" />
+              <span className="text-2xl font-bold">AK47</span>
             </div>
             <p className="text-primary-foreground/80 text-sm">
               Your destination for peaceful and scenic river cruise experiences.
@@ -76,7 +77,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-primary-foreground/20 pt-8 text-center text-sm text-primary-foreground/60">
-          <p>© {currentYear} RiverCruise Co. All rights reserved.</p>
+          <p>© {currentYear} AK47 Co. All rights reserved.</p>
         </div>
       </div>
     </footer>

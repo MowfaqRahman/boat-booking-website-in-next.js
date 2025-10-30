@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { Anchor, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import logonav from "../assets/logonav.png";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -40,9 +41,9 @@ const Navbar = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => scrollToSection("hero")}>
-            <Anchor className="h-8 w-8 text-secondary" />
-            <span className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              RiverCruise
+            <img src={logonav} alt="AK47 Logo" className="h-10 w-auto" />
+            <span className="text-2xl font-bold text-secondary">
+              AK47
             </span>
           </div>
 

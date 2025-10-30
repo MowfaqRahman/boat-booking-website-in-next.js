@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,30 +7,53 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { Calendar, Users, Ship } from "lucide-react";
+import emailjs from '@emailjs/browser';
 
 const BookingSection = () => {
+  const form = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
-    boat: "",
     date: "",
     guests: "",
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const sendEmail = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Booking request received! We'll contact you shortly.");
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      boat: "",
-      date: "",
-      guests: "",
-      message: "",
-    });
+
+    if (form.current) {
+      try {
+        await emailjs.sendForm(
+          'service_169ap32', // Replace with your EmailJS service ID for admin
+          'template_vwsas7e', // Admin Booking Template ID
+          form.current,
+          'NmWO8zzMT5HMD8myG' // Replace with your EmailJS public key
+        );
+
+        // Send confirmation email to the user
+        await emailjs.sendForm(
+          'service_169ap32', // Replace with your EmailJS service ID for user confirmation
+          'template_bmz05wo', // User Booking Confirmation Template ID
+          form.current,
+          'NmWO8zzMT5HMD8myG' // Replace with your EmailJS public key
+        );
+
+        toast.success("Booking request and confirmation email sent!");
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          date: "",
+          guests: "",
+          message: "",
+        });
+      } catch (error) {
+        console.error('❌ EmailJS Error:', error);
+        toast.error("Failed to send booking request or confirmation. Please try again.");
+      }
+    }
   };
 
   const handleChange = (field: string, value: string) => {
@@ -54,12 +77,13 @@ const BookingSection = () => {
             <CardTitle className="text-2xl text-center">Booking Information</CardTitle>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form ref={form} onSubmit={sendEmail} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="name">Full Name</Label>
                   <Input
                     id="name"
+                    name="name" // Ensure this matches {{name}} in your template
                     placeholder="John Doe"
                     value={formData.name}
                     onChange={(e) => handleChange("name", e.target.value)}
@@ -70,6 +94,7 @@ const BookingSection = () => {
                   <Label htmlFor="email">Email</Label>
                   <Input
                     id="email"
+                    name="email" // Ensure this matches {{email}} in your template
                     type="email"
                     placeholder="john@example.com"
                     value={formData.email}
@@ -82,12 +107,13 @@ const BookingSection = () => {
               <div className="space-y-2">
                 <Label htmlFor="phone">Phone Number</Label>
                 <Input
-                  id="phone"
-                  type="tel"
-                  placeholder="+1 (555) 000-0000"
-                  value={formData.phone}
-                  onChange={(e) => handleChange("phone", e.target.value)}
-                  required
+                    id="phone"
+                    name="phone" // Ensure this matches {{phone}} in your template
+                    type="tel"
+                    placeholder="+1 (555) 000-0000"
+                    value={formData.phone}
+                    onChange={(e) => handleChange("phone", e.target.value)}
+                    required
                 />
               </div>
 
@@ -97,12 +123,13 @@ const BookingSection = () => {
                   <div className="relative">
                     <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     <Input
-                      id="date"
-                      type="date"
-                      className="pl-10"
-                      value={formData.date}
-                      onChange={(e) => handleChange("date", e.target.value)}
-                      required
+                        id="date"
+                        name="date" // Ensure this matches {{date}} in your template
+                        type="date"
+                        className="pl-10"
+                        value={formData.date}
+                        onChange={(e) => handleChange("date", e.target.value)}
+                        required
                     />
                   </div>
                 </div>
@@ -111,15 +138,16 @@ const BookingSection = () => {
                   <div className="relative">
                     <Users className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     <Input
-                      id="guests"
-                      type="number"
-                      min="1"
-                      max="8"
-                      placeholder="4"
-                      className="pl-10"
-                      value={formData.guests}
-                      onChange={(e) => handleChange("guests", e.target.value)}
-                      required
+                        id="guests"
+                        name="guests" // Ensure this matches {{guests}} in your template
+                        type="number"
+                        min="1"
+                        max="8"
+                        placeholder="4"
+                        className="pl-10"
+                        value={formData.guests}
+                        onChange={(e) => handleChange("guests", e.target.value)}
+                        required
                     />
                   </div>
                 </div>
@@ -128,13 +156,15 @@ const BookingSection = () => {
               <div className="space-y-2">
                 <Label htmlFor="message">Special Requests (Optional)</Label>
                 <Textarea
-                  id="message"
-                  placeholder="Tell us about any special requirements or preferences..."
-                  rows={4}
-                  value={formData.message}
-                  onChange={(e) => handleChange("message", e.target.value)}
+                    id="message"
+                    name="message" // Ensure this matches {{message}} in your template
+                    placeholder="Tell us about any special requirements or preferences..."
+                    rows={4}
+                    value={formData.message}
+                    onChange={(e) => handleChange("message", e.target.value)}
                 />
               </div>
+              <input type="hidden" name="time" value={new Date().toLocaleString()} />
 
               <Button type="submit" className="w-full bg-secondary hover:bg-secondary/90 text-lg py-6">
                 <Ship className="mr-2 h-5 w-5" />

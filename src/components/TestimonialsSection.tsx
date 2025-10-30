@@ -4,17 +4,17 @@ import { Star } from "lucide-react";
 const TestimonialsSection = () => {
   const testimonials = [
     {
-      name: "Sarah Johnson",
+      name: "Arun Kumar",
       text: "Beautiful river cruise! The captain was knowledgeable, the boat was comfortable, and the scenery was amazing. Perfect afternoon!",
       rating: 5,
     },
     {
-      name: "Michael Chen",
+      name: "Maya Nair",
       text: "Best river tour we've experienced. Peaceful, relaxing, and the captain shared fascinating local history. Highly recommend!",
       rating: 5,
     },
     {
-      name: "Emma Rodriguez",
+      name: "Rahul P.S.",
       text: "Perfect for our family gathering. The boat fit all 8 of us comfortably and we had such a wonderful time on the river.",
       rating: 5,
     },

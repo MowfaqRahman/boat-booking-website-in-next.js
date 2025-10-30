@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,22 +7,10 @@ import { toast } from "sonner";
 import { Mail, Phone, MapPin } from "lucide-react";
 
 const ContactSection = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast.success("Message sent! We'll get back to you soon.");
-    setFormData({ name: "", email: "", message: "" });
-  };
-
   const contactInfo = [
-    { icon: Phone, label: "Phone", value: "+1 (555) 123-4567" },
-    { icon: Mail, label: "Email", value: "info@rivercruise.com" },
-    { icon: MapPin, label: "Location", value: "River Landing, Riverside Town" },
+    { icon: Phone, label: "Phone", value: "+91 954474688" },
+    { icon: Mail, label: "Email", value: "ak47bootlifeofficial@gmail.com" },
+    { icon: MapPin, label: "Location", value: "Aluva, Ernakulam" },
   ];
 
   return (
@@ -39,54 +26,7 @@ const ContactSection = () => {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
-          <div className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Send us a Message</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="contact-name">Name</Label>
-                    <Input
-                      id="contact-name"
-                      placeholder="Your name"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="contact-email">Email</Label>
-                    <Input
-                      id="contact-email"
-                      type="email"
-                      placeholder="your@email.com"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="contact-message">Message</Label>
-                    <Textarea
-                      id="contact-message"
-                      placeholder="How can we help you?"
-                      rows={4}
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      required
-                    />
-                  </div>
-                  <Button type="submit" className="w-full bg-secondary hover:bg-secondary/90">
-                    Send Message
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
-          </div>
-
-          <div className="space-y-6">
+          <div className="space-y-6"> {/* Left column for contact information */} 
             <h3 className="text-2xl font-bold text-foreground mb-6">Contact Information</h3>
             {contactInfo.map((info, index) => (
               <Card key={index} className="hover:shadow-river transition-shadow duration-300">
@@ -101,12 +41,15 @@ const ContactSection = () => {
                 </CardContent>
               </Card>
             ))}
-
-            <Card className="mt-6">
-              <CardContent className="p-0">
-                <div className="w-full h-64 bg-muted rounded-lg overflow-hidden">
+          </div>
+          
+          <div className="space-y-6"> {/* Right column for the map */} 
+            <h3 className="text-2xl font-bold text-foreground mb-6">Our Location</h3> {/* Added heading for the map */} 
+            <Card className="h-full"> {/* Ensure map card takes full height */} 
+              <CardContent className="p-0 h-full">
+                <div className="w-full h-full bg-muted rounded-lg overflow-hidden">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345096435!2d144.95373531531677!3d-37.81720997975171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4c2b349649%3A0xb6899234e561db11!2sEnvato!5e0!3m2!1sen!2sau!4v1510579520212"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3928.799796856526!2d76.33596541527788!3d10.03362929283733!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b0805186b593649%3A0x6334a17d2a58b0f!2sAluva%20River!5e0!3m2!1sen!2sin!4v1678901234567"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}

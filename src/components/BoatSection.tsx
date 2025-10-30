@@ -13,7 +13,7 @@ const BoatSection = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Our River Cruise Boat
+            Our AK47 Boat
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             A beautiful, well-maintained vessel perfect for your river adventure. Comfortable seating for up to 8 passengers.
@@ -29,17 +29,14 @@ const BoatSection = () => {
                   alt="River cruise boat"
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute top-4 right-4 bg-accent text-primary px-4 py-2 rounded-full font-semibold text-lg">
-                  $150/hour
-                </div>
               </div>
             </CardHeader>
             <CardContent className="p-8">
               <div className="mb-6">
-                <span className="text-sm text-secondary font-medium uppercase tracking-wide">River Cruise Vessel</span>
+                <span className="text-sm text-secondary font-medium uppercase tracking-wide">AK47 Vessel</span>
                 <h3 className="text-3xl font-bold text-foreground mb-4">River Explorer</h3>
                 <p className="text-muted-foreground text-lg mb-6">
-                  Experience the tranquility of river cruising in our comfortable, well-appointed boat. 
+                  Experience the tranquility of AK47 in our comfortable, well-appointed boat. 
                   Perfect for family outings, romantic getaways, or celebrations with friends. 
                   Our experienced captain will guide you through the most scenic parts of the river, 
                   sharing local knowledge and ensuring a safe, enjoyable journey.
@@ -110,7 +107,7 @@ const BoatSection = () => {
             </CardContent>
             <CardFooter className="p-8 pt-0">
               <Button onClick={scrollToBooking} className="w-full bg-secondary hover:bg-secondary/90 text-lg py-6">
-                Book Your River Cruise
+                Book Your AK47
               </Button>
             </CardFooter>
           </Card>
